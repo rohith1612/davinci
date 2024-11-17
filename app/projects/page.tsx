@@ -80,9 +80,11 @@ export default function Projects() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const dataString = JSON.stringify(projectData);
-    const encodedData = encodeURIComponent(dataString);
-    router.push(`/generate-prd?projectData=${encodedData}`);
+    const saveData = (data: ProjectData) => {
+      localStorage.setItem("projectData", JSON.stringify(data));
+    };
+    saveData(projectData);
+    router.push(`/generate-prd`);
   };
 
   // Function to handle input changes
