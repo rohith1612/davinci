@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 // Sample interface to define the project data structure
@@ -11,6 +12,7 @@ interface ProjectData {
   CanHaveMoreMembers: boolean;
   MaximumMemberLimit: number;
   ProjectMembers: {
+    Others: string | number | readonly string[] | undefined;
     Designer: number;
     SecurityAnalyst: number;
     BackendDevelopers: number;
@@ -51,6 +53,7 @@ export default function Projects() {
       SecurityAnalyst: 0,
       BackendDevelopers: 0,
       FrontendDevelopers: 0,
+      Others: "",
     },
     ProjectRegulations: [],
     ProjectType: "",
@@ -73,14 +76,14 @@ export default function Projects() {
     AdditionalInformation: "",
   });
 
-  // State to store all projects
-  const [projects, setProjects] = useState<ProjectData[]>([]);
-
   // Function to handle form submission
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    setProjects([...projects, projectData]); // Add current project data to the array
-    console.log("Collected Project Data:", projectData);
+  const handleSubmit = () => {
+    const router = useRouter();
+    // Navigate to the PRD generation page with project data
+    router.push({
+      pathname: "/projects/generate-prd",
+      query: { projectData: JSON.stringify(projectData) },
+    });
   };
 
   // Function to handle input changes
@@ -212,13 +215,192 @@ export default function Projects() {
                 min="0"
               />
             </label>
+            <label className="flex flex-col mt-2">
+              Others:
+              <input
+                type="text"
+                name="Others"
+                value={projectData.ProjectMembers.Others}
+                onChange={handleMemberChange}
+                className="p-2 border border-gray-300 rounded-lg mt-1 text-black"
+                min="0"
+                placeholder="Enter roles in new lines"
+              />
+            </label>
           </fieldset>
 
-          {/* Additional data collection can continue similarly... */}
-          {/* Collect more data as per requirements */}
+          {/* Project Regulations */}
+          <label className="flex flex-col font-medium text-lg">
+            Project Regulations:
+            <input
+              type="text"
+              name="ProjectRegulations"
+              value={projectData.ProjectRegulations.join(", ")}
+              onChange={(e) =>
+                setProjectData((prevData) => ({
+                  ...prevData,
+                  ProjectRegulations: e.target.value
+                    .split(",")
+                    .map((item) => item.trim()),
+                }))
+              }
+              className="p-3 border border-gray-300 rounded-lg mt-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter regulations, separated by commas"
+            />
+          </label>
 
-          <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 mt-6 text-lg font-semibold transition-all duration-200">
-            Submit Project
+          {/* Dependencies */}
+          <fieldset className="flex flex-col gap-3 font-medium text-lg">
+            <legend>Dependencies</legend>
+            <label>
+              Frontend Framework:
+              <input
+                type="text"
+                name="Frontend"
+                value={projectData.Dependencies.Frontend}
+                onChange={(e) =>
+                  setProjectData((prevData) => ({
+                    ...prevData,
+                    Dependencies: {
+                      ...prevData.Dependencies,
+                      Frontend: e.target.value,
+                    },
+                  }))
+                }
+                className="p-3 border border-gray-300 rounded-lg mt-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="e.g., React"
+              />
+            </label>
+
+            <label>
+              Backend Framework:
+              <input
+                type="text"
+                name="Backend"
+                value={projectData.Dependencies.Backend}
+                onChange={(e) =>
+                  setProjectData((prevData) => ({
+                    ...prevData,
+                    Dependencies: {
+                      ...prevData.Dependencies,
+                      Backend: e.target.value,
+                    },
+                  }))
+                }
+                className="p-3 border border-gray-300 rounded-lg mt-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="e.g., Node.js"
+              />
+            </label>
+
+            <label>
+              Database:
+              <input
+                type="text"
+                name="Database"
+                value={projectData.Dependencies.Database}
+                onChange={(e) =>
+                  setProjectData((prevData) => ({
+                    ...prevData,
+                    Dependencies: {
+                      ...prevData.Dependencies,
+                      Database: e.target.value,
+                    },
+                  }))
+                }
+                className="p-3 border border-gray-300 rounded-lg mt-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="e.g., MongoDB"
+              />
+            </label>
+          </fieldset>
+
+          {/* Key Features */}
+          <label className="flex flex-col font-medium text-lg">
+            Key Features:
+            <textarea
+              name="KeyFeatures"
+              value={projectData.KeyFeatures.join("\n")}
+              onChange={(e) =>
+                setProjectData((prevData) => ({
+                  ...prevData,
+                  KeyFeatures: e.target.value
+                    .split("\n")
+                    .map((item) => item.trim()),
+                }))
+              }
+              className="p-3 h-32 border border-gray-300 rounded-lg mt-2 text-black resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter key features, each on a new line"
+            />
+          </label>
+
+          {/* Security Requirements */}
+          <label className="flex flex-col font-medium text-lg">
+            Security Requirements:
+            <textarea
+              name="SecurityRequirements"
+              value={projectData.SecurityRequirements.join("\n")}
+              onChange={(e) =>
+                setProjectData((prevData) => ({
+                  ...prevData,
+                  SecurityRequirements: e.target.value
+                    .split("\n")
+                    .map((item) => item.trim()),
+                }))
+              }
+              className="p-3 h-32 border border-gray-300 rounded-lg mt-2 text-black resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter security requirements, each on a new line"
+            />
+          </label>
+
+          {/* Platform Support */}
+          <label className="flex flex-col font-medium text-lg">
+            Platform Support:
+            <input
+              type="text"
+              name="PlatformSupport"
+              value={projectData.PlatformSupport}
+              onChange={handleInputChange}
+              className="p-3 border border-gray-300 rounded-lg mt-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="e.g., Web application with mobile-friendly design"
+            />
+          </label>
+
+          {/* Non-Functional Requirements */}
+          <label className="flex flex-col font-medium text-lg">
+            Non-Functional Requirements:
+            <textarea
+              name="NonFunctionalRequirements"
+              value={projectData.NonFunctionalRequirements.join("\n")}
+              onChange={(e) =>
+                setProjectData((prevData) => ({
+                  ...prevData,
+                  NonFunctionalRequirements: e.target.value
+                    .split("\n")
+                    .map((item) => item.trim()),
+                }))
+              }
+              className="p-3 h-32 border border-gray-300 rounded-lg mt-2 text-black resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter non-functional requirements, each on a new line"
+            />
+          </label>
+
+          {/* Additional Information */}
+          <label className="flex flex-col font-medium text-lg">
+            Additional Information:
+            <textarea
+              name="AdditionalInformation"
+              value={projectData.AdditionalInformation}
+              onChange={handleInputChange}
+              className="p-3 h-32 border border-gray-300 rounded-lg mt-2 text-black resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter any additional information"
+            />
+          </label>
+
+          <button
+            type="button"
+            onClick={handleSubmit}
+            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 mt-6 text-lg font-semibold transition-all duration-200"
+          >
+            Generate PRD
           </button>
         </form>
       </main>
