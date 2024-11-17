@@ -408,6 +408,3 @@ export default function Projects() {
     </div>
   );
 }
-
-// Export the collected projects data
-// export { projects };
