@@ -160,20 +160,9 @@ export default function GeneratePRD() {
             document={<PRDPdf prdContent={prdDocument} />}
             fileName="generated_prd.pdf"
           >
-            {({ blob, url, loading, error }) =>
-              loading ? (
-                <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600">
-                  Generating PDF...
-                </button>
-              ) : (
-                <button
-                  className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"
-                  onClick={() => (window.location.href = url)}
-                >
-                  Download PDF
-                </button>
-              )
-            }
+            <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600">
+              Download PDF
+            </button>
           </PDFDownloadLink>
         )}
       </main>
