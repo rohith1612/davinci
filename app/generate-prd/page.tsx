@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Groq from "groq-sdk";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import PRDPdf from "../generate-pdf/page";
 
 // Initialize Groq client
 const groq = new Groq({
@@ -153,6 +155,27 @@ export default function GeneratePRD() {
         <div className="bg-gray-100 p-6 rounded-lg shadow-md w-full">
           <pre className="whitespace-pre-wrap text-black">{prdDocument}</pre>
         </div>
+        {prdDocument && (
+          <PDFDownloadLink
+            document={<PRDPdf prdContent={prdDocument} />}
+            fileName="generated_prd.pdf"
+          >
+            {({ blob, url, loading, error }) =>
+              loading ? (
+                <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600">
+                  Generating PDF...
+                </button>
+              ) : (
+                <button
+                  className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"
+                  onClick={() => window.open(url, "_blank")}
+                >
+                  Download PDF
+                </button>
+              )
+            }
+          </PDFDownloadLink>
+        )}
       </main>
     </div>
   );
