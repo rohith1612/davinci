@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 // Sample interface to define the project data structure
@@ -76,14 +76,13 @@ export default function Projects() {
     AdditionalInformation: "",
   });
 
-  // Function to handle form submission
-  const handleSubmit = () => {
-    const router = useRouter();
-    // Navigate to the PRD generation page with project data
-    router.push({
-      pathname: "/projects/generate-prd",
-      query: { projectData: JSON.stringify(projectData) },
-    });
+  const router = useRouter();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const dataString = JSON.stringify(projectData);
+    const encodedData = encodeURIComponent(dataString);
+    router.push(`/generate-prd?projectData=${encodedData}`);
   };
 
   // Function to handle input changes

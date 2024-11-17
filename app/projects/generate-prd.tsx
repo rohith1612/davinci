@@ -49,9 +49,15 @@ export default function GeneratePRD() {
 
   // Parse the projectData from the router's query string
   useEffect(() => {
-    if (router.query.projectData) {
-      const parsedData = JSON.parse(router.query.projectData as string);
-      setProjectData(parsedData);
+    try {
+      if (router.query.projectData) {
+        const parsedData = JSON.parse(
+          decodeURIComponent(router.query.projectData as string)
+        );
+        setProjectData(parsedData);
+      }
+    } catch (error) {
+      console.error("Failed to parse project data from URL:", error);
     }
   }, [router.query.projectData]);
 
