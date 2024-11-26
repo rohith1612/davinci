@@ -162,7 +162,7 @@ export default function GeneratePRD() {
           Generated PRD Document
         </h1>
         <div className="bg-[#243642] p-6 rounded-lg shadow-md w-full lg:w-[1000px] xl:w-[1100px]">
-          <pre className="whitespace-pre-wrap text-[#FCFAEE]">
+          <pre className="whitespace-pre-wrap text-[#FCFAEE] text-xs sm:text-sm">
             {prdDocument}
           </pre>
         </div>
