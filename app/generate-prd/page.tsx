@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Groq from "groq-sdk";
-import { PDFDownloadLink } from "@react-pdf/renderer";
-import PRDPdf from "../generate-pdf/page";
+//import { PDFDownloadLink } from "@react-pdf/renderer";
+//import PRDPdf from "../generate-pdf/page";
 
 // Initialize Groq client
 const groq = new Groq({
