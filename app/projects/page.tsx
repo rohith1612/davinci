@@ -91,12 +91,8 @@ export default function Projects() {
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value, type, checked } = e.target;
-    if (type === "checkbox") {
-      setProjectData((prevData) => ({ ...prevData, [name]: checked }));
-    } else {
-      setProjectData((prevData) => ({ ...prevData, [name]: value }));
-    }
+    const { name, value } = e.target;
+    setProjectData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   // Function to handle member count changes
