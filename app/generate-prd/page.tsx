@@ -167,7 +167,7 @@ export default function GeneratePRD() {
           </pre>
         </div>
 
-        {prdDocument && (
+        {/* {prdDocument && (
           <PDFDownloadLink
             document={<PRDPdf prdContent={prdDocument} />}
             fileName="generated_prd.pdf"
@@ -176,7 +176,7 @@ export default function GeneratePRD() {
               Download PDF
             </button>
           </PDFDownloadLink>
-        )}
+        )} */}
       </main>
     </div>
   );
