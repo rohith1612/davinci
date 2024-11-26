@@ -37,3 +37,11 @@
 // );
 
 // export default PRDPdf;
+
+export default function Home() {
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-[#E2F1E7]">
+      <h1 className="text-[#387478] text-3xl">Welcome to Your Blank Page</h1>
+    </div>
+  );
+}
