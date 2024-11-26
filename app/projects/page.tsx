@@ -12,7 +12,7 @@ interface ProjectData {
   CanHaveMoreMembers: boolean;
   MaximumMemberLimit: number;
   ProjectMembers: {
-    Others: string | number | readonly string[] | undefined;
+    Others: string;
     Designer: number;
     SecurityAnalyst: number;
     BackendDevelopers: number;
@@ -35,7 +35,7 @@ interface ProjectData {
   };
   IntegrationNeeds: string[];
   PlatformSupport: string;
-  NonFunctionalRequirements: string[];
+  NonFunctionalRequirements: string;
   AdditionalInformation: string;
 }
 
@@ -72,7 +72,7 @@ export default function Projects() {
     },
     IntegrationNeeds: [],
     PlatformSupport: "",
-    NonFunctionalRequirements: [],
+    NonFunctionalRequirements: "",
     AdditionalInformation: "",
   });
 
@@ -112,126 +112,126 @@ export default function Projects() {
   };
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-[#E2F1E7]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start w-full max-w-2xl">
-        <h1 className="text-5xl font-bold mb-6 text-center sm:text-left">
+        <h1 className="text-5xl font-bold mb-6 text-center sm:text-left text-[#243642]">
           Project Planner
         </h1>
 
         {/* Extended Form */}
         <form className="flex flex-col gap-6 w-full" onSubmit={handleSubmit}>
-          <label className="flex flex-col font-medium text-lg">
+          <label className="flex flex-col font-medium text-lg text-[#257180]">
             Project Name:
             <input
               type="text"
               name="ProjectName"
               value={projectData.ProjectName}
               onChange={handleInputChange}
-              className="p-3 border border-gray-300 rounded-lg mt-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-3 border border-[#629584] rounded-lg mt-2 text-black focus:outline-none focus:ring-2 focus:ring-[#387478] bg-[#F2E5BF]"
               placeholder="Enter your project name"
               required
             />
           </label>
 
-          <label className="flex flex-col font-medium text-lg">
+          <label className="flex flex-col font-medium text-lg text-[#257180]">
             Project Description:
             <textarea
               name="ProjectDescription"
               value={projectData.ProjectDescription}
               onChange={handleInputChange}
-              className="p-3 h-32 border border-gray-300 rounded-lg mt-2 text-black resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-3 h-32 border border-[#629584] rounded-lg mt-2 text-black resize-none focus:outline-none focus:ring-2 focus:ring-[#387478] bg-[#F2E5BF]"
               placeholder="Enter your project description"
               required
             />
           </label>
 
-          <label className="flex flex-col font-medium text-lg">
+          <label className="flex flex-col font-medium text-lg text-[#257180]">
             Project Scale:
             <input
               type="text"
               name="ProjectScale"
               value={projectData.ProjectScale}
               onChange={handleInputChange}
-              className="p-3 border border-gray-300 rounded-lg mt-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-3 border border-[#629584] rounded-lg mt-2 text-black focus:outline-none focus:ring-2 focus:ring-[#387478] bg-[#F2E5BF]"
               placeholder="e.g., Small, Medium, Large"
             />
           </label>
 
-          <label className="flex flex-col font-medium text-lg">
+          <label className="flex flex-col font-medium text-lg text-[#257180]">
             Project Time Frame:
             <input
               type="text"
               name="ProjectTimeFrame"
               value={projectData.ProjectTimeFrame}
               onChange={handleInputChange}
-              className="p-3 border border-gray-300 rounded-lg mt-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-3 border border-[#629584] rounded-lg mt-2 text-black focus:outline-none focus:ring-2 focus:ring-[#387478] bg-[#F2E5BF]"
               placeholder="e.g., 3 months"
             />
           </label>
 
           {/* Member section */}
-          <fieldset className="border border-gray-300 p-4 rounded-lg">
-            <legend className="font-medium text-lg">Project Members</legend>
-            <label className="flex flex-col mt-2">
+          <fieldset className="border border-[#629584] p-4 rounded-lg bg-[#E2F1E7]">
+            <legend className="font-medium text-lg text-[#257180]">
+              Project Members
+            </legend>
+            <label className="flex flex-col mt-2 text-[#257180]">
               Designers:
               <input
                 type="number"
                 name="Designer"
                 value={projectData.ProjectMembers.Designer}
                 onChange={handleMemberChange}
-                className="p-2 border border-gray-300 rounded-lg mt-1 text-black"
+                className="p-2 border border-[#629584] rounded-lg mt-1 text-black bg-[#F2E5BF]"
                 min="0"
               />
             </label>
-            <label className="flex flex-col mt-2">
+            <label className="flex flex-col mt-2 text-[#257180]">
               Security Analysts:
               <input
                 type="number"
                 name="SecurityAnalyst"
                 value={projectData.ProjectMembers.SecurityAnalyst}
                 onChange={handleMemberChange}
-                className="p-2 border border-gray-300 rounded-lg mt-1 text-black"
+                className="p-2 border border-[#629584] rounded-lg mt-1 text-black bg-[#F2E5BF]"
                 min="0"
               />
             </label>
-            <label className="flex flex-col mt-2">
+            <label className="flex flex-col mt-2 text-[#257180]">
               Backend Developers:
               <input
                 type="number"
                 name="BackendDevelopers"
                 value={projectData.ProjectMembers.BackendDevelopers}
                 onChange={handleMemberChange}
-                className="p-2 border border-gray-300 rounded-lg mt-1 text-black"
+                className="p-2 border border-[#629584] rounded-lg mt-1 text-black bg-[#F2E5BF]"
                 min="0"
               />
             </label>
-            <label className="flex flex-col mt-2">
+            <label className="flex flex-col mt-2 text-[#257180]">
               Frontend Developers:
               <input
                 type="number"
                 name="FrontendDevelopers"
                 value={projectData.ProjectMembers.FrontendDevelopers}
                 onChange={handleMemberChange}
-                className="p-2 border border-gray-300 rounded-lg mt-1 text-black"
+                className="p-2 border border-[#629584] rounded-lg mt-1 text-black bg-[#F2E5BF]"
                 min="0"
               />
             </label>
-            <label className="flex flex-col mt-2">
+            <label className="flex flex-col mt-2 text-[#387478]">
               Others:
-              <input
-                type="text"
+              <textarea
                 name="Others"
                 value={projectData.ProjectMembers.Others}
-                onChange={handleMemberChange}
-                className="p-2 border border-gray-300 rounded-lg mt-1 text-black"
-                min="0"
-                placeholder="Enter roles in new lines"
+                onChange={handleInputChange}
+                className="p-2 border border-[#629584] rounded-lg mt-1 text-black bg-[#F2E5BF]"
+                placeholder="Enter Additional Roles separated by commas"
               />
             </label>
           </fieldset>
 
           {/* Project Regulations */}
-          <label className="flex flex-col font-medium text-lg">
+          <label className="flex flex-col font-medium text-lg text-[#387478]">
             Project Regulations:
             <input
               type="text"
@@ -242,18 +242,19 @@ export default function Projects() {
                   ...prevData,
                   ProjectRegulations: e.target.value
                     .split(",")
-                    .map((item) => item.trim()),
+                    .map((item) => item.trim()), // Allow spaces between items
                 }))
               }
-              className="p-3 border border-gray-300 rounded-lg mt-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-3 border border-[#629584] rounded-lg mt-2 text-[#243642] bg-[#F2E5BF] focus:outline-none focus:ring-2 focus:ring-[#257180]"
               placeholder="Enter regulations, separated by commas"
             />
           </label>
 
           {/* Dependencies */}
-          <fieldset className="flex flex-col gap-3 font-medium text-lg">
+          <fieldset className="flex flex-col gap-3 font-medium text-lg text-[#387478]">
             <legend>Dependencies</legend>
-            <label>
+
+            <label className="flex flex-col">
               Frontend Framework:
               <input
                 type="text"
@@ -268,12 +269,12 @@ export default function Projects() {
                     },
                   }))
                 }
-                className="p-3 border border-gray-300 rounded-lg mt-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="p-3 border border-[#629584] rounded-lg mt-2 text-[#243642] bg-[#F2E5BF] focus:outline-none focus:ring-2 focus:ring-[#257180]"
                 placeholder="e.g., React"
               />
             </label>
 
-            <label>
+            <label className="flex flex-col">
               Backend Framework:
               <input
                 type="text"
@@ -288,12 +289,12 @@ export default function Projects() {
                     },
                   }))
                 }
-                className="p-3 border border-gray-300 rounded-lg mt-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="p-3 border border-[#629584] rounded-lg mt-2 text-[#243642] bg-[#F2E5BF] focus:outline-none focus:ring-2 focus:ring-[#257180]"
                 placeholder="e.g., Node.js"
               />
             </label>
 
-            <label>
+            <label className="flex flex-col">
               Database:
               <input
                 type="text"
@@ -308,14 +309,14 @@ export default function Projects() {
                     },
                   }))
                 }
-                className="p-3 border border-gray-300 rounded-lg mt-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="p-3 border border-[#629584] rounded-lg mt-2 text-[#243642] bg-[#F2E5BF] focus:outline-none focus:ring-2 focus:ring-[#257180]"
                 placeholder="e.g., MongoDB"
               />
             </label>
           </fieldset>
 
           {/* Key Features */}
-          <label className="flex flex-col font-medium text-lg">
+          <label className="flex flex-col font-medium text-lg text-[#387478]">
             Key Features:
             <textarea
               name="KeyFeatures"
@@ -325,16 +326,16 @@ export default function Projects() {
                   ...prevData,
                   KeyFeatures: e.target.value
                     .split("\n")
-                    .map((item) => item.trim()),
+                    .map((item) => item.trim()), // Allow spaces between lines
                 }))
               }
-              className="p-3 h-32 border border-gray-300 rounded-lg mt-2 text-black resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-3 h-32 border border-[#629584] rounded-lg mt-2 text-[#243642] bg-[#F2E5BF] resize-none focus:outline-none focus:ring-2 focus:ring-[#257180]"
               placeholder="Enter key features, each on a new line"
             />
           </label>
 
           {/* Security Requirements */}
-          <label className="flex flex-col font-medium text-lg">
+          <label className="flex flex-col font-medium text-lg text-[#387478]">
             Security Requirements:
             <textarea
               name="SecurityRequirements"
@@ -344,54 +345,47 @@ export default function Projects() {
                   ...prevData,
                   SecurityRequirements: e.target.value
                     .split("\n")
-                    .map((item) => item.trim()),
+                    .map((item) => item.trim()), // Allow spaces between lines
                 }))
               }
-              className="p-3 h-32 border border-gray-300 rounded-lg mt-2 text-black resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-3 h-32 border border-[#629584] rounded-lg mt-2 text-[#243642] bg-[#F2E5BF] resize-none focus:outline-none focus:ring-2 focus:ring-[#257180]"
               placeholder="Enter security requirements, each on a new line"
             />
           </label>
 
           {/* Platform Support */}
-          <label className="flex flex-col font-medium text-lg">
+          <label className="flex flex-col font-medium text-lg text-[#387478]">
             Platform Support:
             <input
               type="text"
               name="PlatformSupport"
               value={projectData.PlatformSupport}
               onChange={handleInputChange}
-              className="p-3 border border-gray-300 rounded-lg mt-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-3 border border-[#629584] rounded-lg mt-2 text-[#243642] bg-[#F2E5BF] focus:outline-none focus:ring-2 focus:ring-[#257180]"
               placeholder="e.g., Web application with mobile-friendly design"
             />
           </label>
 
           {/* Non-Functional Requirements */}
-          <label className="flex flex-col font-medium text-lg">
+          <label className="flex flex-col font-medium text-lg text-[#387478]">
             Non-Functional Requirements:
             <textarea
               name="NonFunctionalRequirements"
-              value={projectData.NonFunctionalRequirements.join("\n")}
-              onChange={(e) =>
-                setProjectData((prevData) => ({
-                  ...prevData,
-                  NonFunctionalRequirements: e.target.value
-                    .split("\n")
-                    .map((item) => item.trim()),
-                }))
-              }
-              className="p-3 h-32 border border-gray-300 rounded-lg mt-2 text-black resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter non-functional requirements, each on a new line"
+              value={projectData.NonFunctionalRequirements}
+              onChange={handleInputChange}
+              className="p-3 h-32 border border-[#629584] rounded-lg mt-2 text-[#243642] bg-[#F2E5BF] resize-none focus:outline-none focus:ring-2 focus:ring-[#257180]"
+              placeholder="Enter non-functional requirements, separated by commas"
             />
           </label>
 
           {/* Additional Information */}
-          <label className="flex flex-col font-medium text-lg">
+          <label className="flex flex-col font-medium text-lg text-[#387478]">
             Additional Information:
             <textarea
               name="AdditionalInformation"
               value={projectData.AdditionalInformation}
               onChange={handleInputChange}
-              className="p-3 h-32 border border-gray-300 rounded-lg mt-2 text-black resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-3 h-32 border border-[#629584] rounded-lg mt-2 text-[#243642] bg-[#F2E5BF] resize-none focus:outline-none focus:ring-2 focus:ring-[#257180]"
               placeholder="Enter any additional information"
             />
           </label>
@@ -399,7 +393,7 @@ export default function Projects() {
           <button
             type="button"
             onClick={handleSubmit}
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 mt-6 text-lg font-semibold transition-all duration-200"
+            className="px-6 py-3 bg-[#257180] text-white rounded-lg mt-6 text-lg font-semibold transition-transform duration-300 transform hover:scale-105 hover:bg-[#387478] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-[#629584] focus:ring-opacity-50"
           >
             Generate PRD
           </button>
