@@ -25,9 +25,9 @@ interface ProjectData {
     Backend: string;
     Database: string;
   };
-  KeyFeatures: string[];
+  KeyFeatures: string;
   TargetAudience: string;
-  SecurityRequirements: string[];
+  SecurityRequirements: string;
   UserFlow: string[];
   PerformanceMetrics: {
     responseTime: string;
@@ -62,9 +62,9 @@ export default function Projects() {
       Backend: "",
       Database: "",
     },
-    KeyFeatures: [],
+    KeyFeatures: "",
     TargetAudience: "",
-    SecurityRequirements: [],
+    SecurityRequirements: "",
     UserFlow: [],
     PerformanceMetrics: {
       responseTime: "",
@@ -96,13 +96,16 @@ export default function Projects() {
   };
 
   // Function to handle member count changes
-  const handleMemberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleMemberChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
+
     setProjectData((prevData) => ({
       ...prevData,
       ProjectMembers: {
         ...prevData.ProjectMembers,
-        [name]: parseInt(value),
+        [name]: name === "Others" ? value : parseInt(value, 10), // String for 'Others', number otherwise
       },
     }));
   };
@@ -214,13 +217,13 @@ export default function Projects() {
                 min="0"
               />
             </label>
-            <label className="flex flex-col mt-2 text-[#387478]">
+            <label className="flex flex-col font-medium text-lg text-[#387478]">
               Others:
               <textarea
                 name="Others"
                 value={projectData.ProjectMembers.Others}
-                onChange={handleInputChange}
-                className="p-2 border border-[#629584] rounded-lg mt-1 text-black bg-[#F2E5BF]"
+                onChange={handleMemberChange}
+                className="p-3 h-32 border border-[#629584] rounded-lg mt-2 text-[#243642] bg-[#F2E5BF] resize-none focus:outline-none focus:ring-2 focus:ring-[#257180]"
                 placeholder="Enter Additional Roles separated by commas"
               />
             </label>
@@ -248,7 +251,7 @@ export default function Projects() {
 
           {/* Dependencies */}
           <fieldset className="flex flex-col gap-3 font-medium text-lg text-[#387478]">
-            <legend>Dependencies</legend>
+            <legend className="text-2xl font-bold">Dependencies</legend>
 
             <label className="flex flex-col">
               Frontend Framework:
@@ -316,15 +319,8 @@ export default function Projects() {
             Key Features:
             <textarea
               name="KeyFeatures"
-              value={projectData.KeyFeatures.join("\n")}
-              onChange={(e) =>
-                setProjectData((prevData) => ({
-                  ...prevData,
-                  KeyFeatures: e.target.value
-                    .split("\n")
-                    .map((item) => item.trim()), // Allow spaces between lines
-                }))
-              }
+              value={projectData.KeyFeatures}
+              onChange={handleInputChange}
               className="p-3 h-32 border border-[#629584] rounded-lg mt-2 text-[#243642] bg-[#F2E5BF] resize-none focus:outline-none focus:ring-2 focus:ring-[#257180]"
               placeholder="Enter key features, each on a new line"
             />
@@ -335,15 +331,8 @@ export default function Projects() {
             Security Requirements:
             <textarea
               name="SecurityRequirements"
-              value={projectData.SecurityRequirements.join("\n")}
-              onChange={(e) =>
-                setProjectData((prevData) => ({
-                  ...prevData,
-                  SecurityRequirements: e.target.value
-                    .split("\n")
-                    .map((item) => item.trim()), // Allow spaces between lines
-                }))
-              }
+              value={projectData.SecurityRequirements}
+              onChange={handleInputChange}
               className="p-3 h-32 border border-[#629584] rounded-lg mt-2 text-[#243642] bg-[#F2E5BF] resize-none focus:outline-none focus:ring-2 focus:ring-[#257180]"
               placeholder="Enter security requirements, each on a new line"
             />

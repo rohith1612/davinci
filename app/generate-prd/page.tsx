@@ -2,13 +2,53 @@
 
 import { useState, useEffect } from "react";
 import Groq from "groq-sdk";
-//import { PDFDownloadLink } from "@react-pdf/renderer";
 //import PRDPdf from "../generate-pdf/page";
+import {
+  PDFDownloadLink,
+  Document,
+  Page,
+  Text,
+  View,
+  StyleSheet,
+} from "@react-pdf/renderer";
 
 // Initialize Groq client
 const groq = new Groq({
   apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY,
   dangerouslyAllowBrowser: true,
+});
+
+const PRDPdf = ({ prdContent }: { prdContent: string }) => (
+  <Document>
+    <Page style={styles.page}>
+      <View style={styles.section}>
+        <Text style={styles.heading}>Generated PRD Document</Text>
+        {prdContent.split("\n").map((line, index) => (
+          <Text key={index} style={styles.content}>
+            {line}
+          </Text>
+        ))}
+      </View>
+    </Page>
+  </Document>
+);
+
+const styles = StyleSheet.create({
+  page: {
+    padding: 30,
+  },
+  section: {
+    marginBottom: 20,
+  },
+  heading: {
+    fontSize: 18,
+    marginBottom: 10,
+    fontWeight: "bold",
+  },
+  content: {
+    fontSize: 12,
+    marginBottom: 10,
+  },
 });
 
 // Define the structure of your project data
@@ -81,9 +121,9 @@ export default function GeneratePRD() {
     - Project Regulations: ${projectData.ProjectRegulations.join(", ")}
     - Project Type: ${projectData.ProjectType}
     - Dependencies: ${JSON.stringify(projectData.Dependencies, null, 2)}
-    - Key Features: ${projectData.KeyFeatures.join(", ")}
+    - Key Features: ${projectData.KeyFeatures.join}
     - Target Audience: ${projectData.TargetAudience}
-    - Security Requirements: ${projectData.SecurityRequirements.join(", ")}
+    - Security Requirements: ${projectData.SecurityRequirements}
     - User Flow: ${projectData.UserFlow.join(" -> ")}
     - Performance Metrics: ${JSON.stringify(
       projectData.PerformanceMetrics,
@@ -167,7 +207,7 @@ export default function GeneratePRD() {
           </pre>
         </div>
 
-        {/* {prdDocument && (
+        {prdDocument && (
           <PDFDownloadLink
             document={<PRDPdf prdContent={prdDocument} />}
             fileName="generated_prd.pdf"
@@ -176,7 +216,7 @@ export default function GeneratePRD() {
               Download PDF
             </button>
           </PDFDownloadLink>
-        )} */}
+        )}
       </main>
     </div>
   );
