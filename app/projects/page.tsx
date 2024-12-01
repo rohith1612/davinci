@@ -76,14 +76,27 @@ export default function Projects() {
     AdditionalInformation: "",
   });
 
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const saveData = (data: ProjectData) => {
+
+    // Validation: Check if required fields are filled
+    if (!projectData.ProjectName || !projectData.ProjectDescription) {
+      setError("You need to enter both Project Name and Project Description.");
+      return;
+    }
+
+    setError(null); // Clear any previous error
+
+    // Save data and navigate
+    const saveData = (data: typeof projectData) => {
       localStorage.setItem("projectData", JSON.stringify(data));
     };
     saveData(projectData);
+
+    // Navigate to the next page
     router.push(`/generate-prd`);
   };
 
@@ -374,6 +387,8 @@ export default function Projects() {
               placeholder="Enter any additional information"
             />
           </label>
+
+          {error && <span className="text-red-500 text-sm mt-2">{error}</span>}
 
           <button
             type="button"
